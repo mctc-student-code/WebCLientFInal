@@ -1,0 +1,10 @@
+#list-of-text {     width: 320px;
+    height: 100px;
+    padding: 30px;
+    border: 10px solid gray;
+    margin: 0;  
+    list-style-type: none; 
+    text-align: center;
+    box-sizing:content-box;
+    
+}

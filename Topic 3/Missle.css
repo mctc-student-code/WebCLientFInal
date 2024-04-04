@@ -1,0 +1,8 @@
+#test-only { color:rgb(4, 125, 0); background-color: rgb(19, 0, 223);}
+/*For now on I might just make sure all code is followed by ;
+It took me forever to figure out why the links weren't changing color'*/
+#real-alert {color: rgb(200, 27, 27);
+    background-color: black;}
+a {text-decoration: none; font-size: 35px; border: 0cqmin;
+/*I finally figured out how to wrap border around text T^T*/
+display: inline;}

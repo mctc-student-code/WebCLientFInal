@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> </title>
+</head>
+<body>
+<p> What is the captial or Wisconsin?</p>
+
+
+<Button class="Wrong-Answer"> Bayfield</Button>
+<Button id="Correct-Answer"> Madison</Button>
+<button class="Wrong-Answer">Milwaukee</button>
+
+
+<p id="result"></p>
+
+
+<script> 
+//Write script here
+//Correct awnser button down below
+let CorrectAnswerButton = document.querySelector('#Correct-Answer')
+
+let result = document.querySelector('#result')
+
+
+let WrongAnswerButtons = document.querySelectorAll('.Wrong-Answer')
+console.log(WrongAnswerButtons)
+//Correct awnswer button listener down below
+CorrectAnswerButton.addEventListener('click', function() {
+      result.innerHTML = 'Correct Awnser!'
+     CorrectAnswerButton.style.background = 'yellow'
+
+})
+
+//Wrong awnser button down below
+WrongAnswerButtons.forEach(function(WrongAnswerButtons) { 
+  WrongAnswerButtons.addEventListener('click', function() {
+  result.innerHTML = 'Wrong answer, try again'
+CorrectAnswerButton.style.background = defaultButtonColor})
+})
+
+
+let defaultButtonColor = CorrectAnswerButton.style.background
+</script>
+
+</body>
+</html>

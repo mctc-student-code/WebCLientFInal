@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       <meta name="viewport" content="width=device-width, intial-scale=1" charset="UTF-8">
+       <title>Confrencee Registration form</title>
+           <!--THis is the link to the bootstrap the page will use-->
+           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="Confrencee-registration.css">
+        
+    </head>
+<body>
+
+
+<form>
+    <!--Down below ask the user for their name-->
+    <label class="form-label" for="Name"> Name*</label> <input id="name" maxlength="70" class="form-control"required> <br>
+    <!--Down below ask the user for their password-->
+    <label class="form-label" for="Password">Password*</label> <input id="Password" class="form-control" type="password" required> <br>
+    <!--Down below ask the user for their email-->
+    <label class="form-label" for="EMail">Email*</label> <input id="EMail" class="form-control" type="email" required> <br>
+    <!--Down below ask what size they want their free T-Shirt to be-->
+    <label for="T-Shirt-Sizes">T-Shirt Size*
+    <select name="Free-T-SHirt" id="T-Shirt-Sizes" required>
+        <option value="Small-T-Shirt">Small T-Shirt</option>
+        <option value="Medium-T-Shirt"> Medium T-Shirt</option>
+        <option value="Large-T-Shirt">Large T-Shirt</option>
+        <option value="XL-T-Shirt"> XL T-Shirt</option>
+        <option value="XXL-T-Shirt">XXL T-Shirt</option>
+        <option value="XXXL-T-Shirt">XXXL T-Shirt</option>
+        <option value="XXXXL-T-Shirt">XXXXL T-Shirt</option>
+        </select> <br>
+    </label>
+    <!--Down below ask the user what their birthday is-->
+    <br>
+    <label class="form-label" for="Date-Of-Birth"> D/O/B</label> <input id="Date-Of-Birth" class="form-control" type="date"> <br>
+    <!--Down below inquies if they want to recive email updates-->
+    <label class="form-label" for="Email-Updates" id="Email-Updates">Do you want email updates from our sponsors?</label> 
+    <!--Yes Email updates down below-->
+        <input name="Email-Updates" class="form-check-input" type="radio" required> Yes
+        <label for="Yes" class=form-check-label ></label>
+    <!--No Email Updates down below-->
+        <input name="Email-Updates" class="form-check-input" type="radio" required>No
+        <label for="No" class="form-check-label" ></label> <br>
+        <!--Down below is where they decide which session they want to join-->
+    <label for="Choose-Session" class="form-label">Which session would you like to attend?</label> <br>
+    <!--Yes/No Morning Session down below-->
+    <input type="checkbox" class="form-control" id="Morning" name="Morning" value="Morning-Session">
+    <label for="Morning-Session">Morning Session</label> <br>
+    <!-- Yes/No Afternoon Session down below-->
+    <input type="checkbox" class="form-control" id="Afternoon" name="Afternoon" value="Afternoon-Session">
+    <label for="Afternoon-Session">Afternoon Session</label> <br>
+    <!--Down below ask the user if they have any special request-->
+    <div class="row ml-5">
+        <div class="col-md-6 ">    
+            <p>Do you have any special requests of the Confrencee?</p>
+    </div>
+    <label for="special-Request" class="form-label"></label> 
+    <textarea name="special-Request" id="special-Request" cols="70" rows="7"></textarea> <br>
+    <label for="Submit" class="form-label"></label> <input type="submit">
+
+
+
+
+
+
+
+</form> 
+</body>
