@@ -21,6 +21,8 @@ let iss_location = {
 // Extract the longitude value, and log it to the console.
 let Latitude = iss_location.iss_position.latitude
 console.log(Latitude)
+let Longitude = iss_location.iss_position.longitude
+console.log(Longitude)
 
 
 
