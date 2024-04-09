@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello Vue forms!</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+<body>
+    
+<div id="app">
+    <h1>Task List</h1><!-- this line  of code displays the pupose of this webpage. Which is to be task list-->
+    
+    <h2>Enter new task</h2><!-- this line request that the user enters a new task into the list-->
+    <button v-on:click="addTask">Add Task</button><!--this line 1.creates a button and 2 recognizes that said button has been clicked-->
+    <label>Please enter your task -> </label><!-- this line shows the user where to enter their new task-->
+    <input v-model="newTask"> <!--this uses Vue to show and update the value in real time-->
+    <h2>Task List</h2><!--displays the items in the task list-->
+    <ul><!--add bullets to the list items-->
+    <li v-for="task in taskList"> <!-- print a task For each task in the task list print o -->
+    {{task}} <!--Hold the items in the task list and displays it -->
+    </li>
+    </ul>
+</div>
+
+<script>
+    const { createApp, ref} = Vue
+
+    createApp({//this section addes some default values to the list Water plants, Pay cell bill, and Walk dog. While also reseting the new task once a new item has been added
+        setup() {
+            const taskList = ref(['Water plants','Pay cell bill', 'Walk dog'])
+            const newTask = ref('') 
+
+            function addTask() {
+                //adds new task to tasklist
+                if(newTask.value){
+                taskList.value.push(newTask.value)//pushes the new task to the back of hte list
+                newTask.value =''
+            }
+            }
+        return{ //returns the changed values
+            taskList,
+            newTask,
+            addTask
+        }
+
+    }
+    }).mount('#app')
+
+</script>
+
+</body>

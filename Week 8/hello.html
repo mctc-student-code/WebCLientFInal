@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello Vue!</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    
+
+<div id="app">
+<!--Will manage the HTMl-->
+<h1>Hello Vue!</h1>
+{{message}} <!-- this line of code displays the message created in the create app space down below-->
+
+<button v-on:click="addExclamationPoints"> add Exclamation Points</button> <!-- This line of code
+has dual functionality it not only creates a buttton that can be clicked and add elcamation marks to the message,
+but also responds to the action of clicking itself. In html these would be 2 seperarte secs of code 
+so it's nice that v-on makes the process much more simple-->
+<button v-on:click="clearExclamationPoints"> clear Exclamation Points</button><!--everthing that was said about the code above is true here as well.
+The only difference is that instead of adding exlamation marks it removes them. More specifically it resets it back to its default value-->
+</div>
+
+<script> // This script block contains the meat and potatos of the program. It makes it so that the webpage responds to user action
+    const {createApp, ref, computed }= Vue//only imports create app refrence from the vue library
+
+    createApp({
+        setup() {
+
+
+            const message =ref('Hi!') //tThis line of code adds a value to message this value being hi
+            const numberOfExclmationPoints = ref(1) //this number is vital for the program. It has 2 primary uses. 
+            //1. to keep track of the number of times we added exlamation marks to the message
+            //2. be the defauly value we use to reset the code
+                //defines things the app needs
+
+            function addExclamationPoints() { //this is the function that will add exclamation marks to message
+                if (numberOfExclmationPoints.value < 10){ //this line of code limits how many time we add exlamation marks
+                message.value = message.value + '! '// this line of code adds the exclamation mark that we'll use to add to the message
+                numberOfExclmationPoints.value ++//incremetns the numberOfExclmationPoints by 1 each time a exlamation mark is added
+                } else { //this line of code and the one below it run once the user hits max numberOfExclmationPoints
+                    alert('No more exlamation points')//once the user hits max numberOfExclmationPoints an alert pops up and infroms the user that they can't add anymore !
+                }
+            }
+            function clearExclamationPoints() { // this is the function that will remove the added exlamation marks from message
+                numberOfExclmationPoints.value = 1 // this line resets the numberOfExclmationPoints back to 1 essentally reseting it
+                message.value = 'Hi!'// like the code above this sec rests the message back to its default
+
+            }
+
+            const messageWithExlamationPoints = computed( function(){// this block of  code remagines the code above as a for loop its values currenlty aren't used
+                let computedmessage = message.value
+                //based on the number of exclamation points
+                for (let x = 0; x < numberOfExclmationPoints.value; x++) {
+                    computedmessage = computedmessage + '!"'
+                }
+            return computedmessage
+
+
+            })
+            return{// this block retuns  all of the changed values to the code uptop in the buttons effectively completeing our program
+                message,
+                addExclamationPoints,
+                clearExclamationPoints
+            }
+        }
+    }).mount('#app')
+
+</script>
+
+</body>
+</html>

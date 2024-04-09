@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello Vue forms!</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!-- the code below makes the table headers and table data display a bit neater than the default-->
+    <style>
+    th, td { width: 25%;
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    
+<div id="app">
+<table><!-- this is the table that holds this programs primary functions and logic-->
+    <tr><!--displays the names of each value directly below it-->
+        <th>Item</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+
+    <tr><!-- this row dispalys the values of the cart evertyhing form name, price and total-->
+        <td>{{name}}</td>
+        <td>{{unitPrice}}</td>
+        <td><input type="number" V-model ="Quantity"></td>
+        <td>{{total}}</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+
+<script>
+    const { createApp,computed, ref} = Vue
+//the code down belwo  creats one item named hat and gives it a value, as well as a default value. It also holds the logic that will calculate the total cost of the carts order
+
+    createApp({
+        setup() {
+        const name = ref('Hat')
+        const Quantity = ref(1)
+        const unitPrice = ref(4.99)
+        const total = computed(function() {
+            const totalPrice = Quantity.value * unitPrice.value
+            const formattedPrice = totalPrice.toFixed(2)
+            return formattedPrice
+        })
+
+            return{//returns all of the values, so we can use them in the webpage
+                name,
+                Quantity,
+                unitPrice,
+                total
+        }
+        }
+
+    }).mount('#app')
+
+</script>
+
+</body>

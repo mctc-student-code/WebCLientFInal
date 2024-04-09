@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello Vue forms!</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    
+<div id="app">
+
+    <h1>Enter your Name</h1> <!-- this line fo code displays a request to the user to enter their name in  big bold text-->
+    <label>Please enter your name: </label> <!-- this line of code informs the user that they enter their name in the box to the right-->
+    <input v-model="name"> <!-- this line of code turns the input into the Vue model. Making it so that the page will update to the value the user inserts into the box-->
+
+    <p v-if = "name">Your Name is {{name}}</p> <!--this paragragh elements not only displays the but checks to see if the name box has a value in it -->
+    <p v-else>Awaiting user input </p><!--This line of code informs the user that the program wants input by displaying a message-->
+
+    <button v-on:click="clearName"> clear Name</button> <!--This button will reset the value your typing so you don't have to manually delete it all-->
+</div>
+
+<script> // this is the block of code where the magic happens
+    const { createApp, ref} = Vue // give the program acceess to Vues functions
+
+    createApp({
+        setup() {
+
+            const name = ref('') //empty string
+
+            function clearName(){ // this block holds the logic that clears the user input 
+                name.value = ''//resets name to base value
+            }            
+
+            return{
+            name,//these 3 lines of code return the changed the values
+            clearName
+        }
+        }
+
+    }).mount('#app')
+
+</script>
+
+</body>
