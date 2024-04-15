@@ -1,7 +1,6 @@
 #student-table {
     max-height: 400px;
     overflow: scroll;
-    
 }
 
 th, tr {
@@ -10,7 +9,6 @@ th, tr {
 
 li{ 
     text-align: left;
-    text
 }
 .present {
     color: gray;
