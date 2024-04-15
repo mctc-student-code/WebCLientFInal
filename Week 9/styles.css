@@ -1,6 +1,7 @@
 #student-table {
     max-height: 400px;
     overflow: scroll;
+    
 }
 
 th, tr {
