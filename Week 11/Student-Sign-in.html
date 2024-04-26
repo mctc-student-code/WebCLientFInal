@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Sign In</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+
+<body>
+    <div id="app">
+        
+        <div id="new-student-form-errors" class="m-2">
+            <!-- TODO show errors from form validation -->
+            {{formErrors}}
+            <div v-if="formErrors.length >0" class="alert alert-danger">
+                <li v-for="error in formErrors">
+                    {{error}}
+                </li>
+            </div>
+        </div>
+
+
+        <div id="new-student-form" class="card add-student m-2 p-2">
+            <h4 class="card-title">Add new student</h4>
+            <h5>{{studentCount}} students in class.</h5>
+
+            <div class="form-group mb-3">
+                <label for="name">Name</label>
+                <!-- TODO v-model newStudentName -->
+                <input v-model.trim="newStudentName" id="name" class="form-control">
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="starID">Star ID</label>
+                 <!-- TODO v-model newStarID -->
+                <input v-model.trim="newStarID" id="starID" class="form-control">
+            </div>
+
+            <!-- TODO v-on:click event handler -->
+            <button v-on:click="addStudent" class="btn btn-primary">Add</button>
+        </div>
+
+
+        <div id="student-list-table" class="card m-2 p-2">
+            <h4 class="card-title">Student List</h4>
+            <div id="student-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>StarID</th>
+                            <th>Present?</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+
+                   <tbody>
+                    <tr v-for="student in sortedStudents" v-bind:class="{present:student.present, absent: !student.present}">
+                        <td>{{student.name}}</td>
+                        <td>{{student.starID}}</td>
+                        
+                        <td> <input type="checkbox" v-model="student.present" v-on:change="arrivedOrLeft(student)">
+                                                            <!--in the code above V-on:change is used to create a function called arrived or left. Which uses student to tell whose checkbox  was checked-->
+                            <span v-if="student.present" class="mx-3">Present!</span>
+                            <span v-else class="mx-3">Not present</span>
+                        </td><!-- add checkbox-->
+                        <td>
+                            <button v-on:click="deleteStudent(student)" class="btn btn-danger">
+                                <i class="bi bi-trash2"></i>Delete?</button>
+                        </td><!-- add delete button-->
+
+                    </tr>
+
+                   </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <div id="welcome-or-goodbye-message" class="m-2">
+           <div v-if="mostRecentStudent.name">
+
+                <div v-if="mostRecentStudent.present" class="alert alert-success">
+                     {{mostRecentStudent.name}}  has arrived
+                </div>
+                <div v-else class="alert alert-danger">
+                    {{mostRecentStudent.name }} has departed
+                </div>
+            </div>
+            <!-- TODO show a message when student arrives or leaves  -->
+            
+        </div>
+
+    </div>
+
+    <script>
+
+    const{createApp, computed, ref} = Vue
+
+    createApp({
+        setup(){
+            //create reactive data
+            const newStudentName = ref('')
+            const newStarID = ref('')
+
+            //students have a name, starid, present (boolean)
+            const studentList = ref([
+                { name: 'Aba Mohhamed', starID: '111ABM222', present: false},
+                { name: 'Abby Monarch', starID: '222ABM333', present: false},
+                { name: 'Akagi  Saito', starID: '333AKS444', present: false},
+                { name: 'Candy  Summers', starID: '222CAS555', present: false},
+                { name: 'Bao  Yangling', starID: '333AKS444', present: false},
+            ])
+
+            const formErrors = ref([])
+            const mostRecentStudent = ref({})
+            //create functions
+
+                function addStudent(){
+                    formErrors.value= []
+                //validity check
+                    if(newStudentName.value.length == 0) {
+                    formErrors.value.push('A student name must be entered')
+                    }
+                    if(newStarID.value.length == 0) {
+                    formErrors.value.push('A students starID must be entered')
+                    }
+                    //If ther're no errors
+                        if (formErrors.value.length == 0){
+                        let student = {
+                            name: newStudentName.value,
+                            starID: newStarID.value,
+                            present: false
+                            }
+                        studentList.value.push(student)
+                        newStudentName.value= ''
+                        newStarID.value= ''
+                        }
+                }   
+            //create computed properties
+
+            function arrivedOrLeft(student) {
+                //alert(student.name +' has arrived')
+                mostRecentStudent.value = student
+            }
+
+            function deleteStudent(studentToDelete){
+/*                 studentToDelete = studentList.value.filter((student) => {
+                    return student != Students
+                })
+ */
+                if (confirm(`Delete ${studentToDelete.name}?`)) {
+                const studentListWithoutDeletedStudent = []
+                studentList.value.forEach( student => {
+                        if(student != studentToDelete) {
+                            studentListWithoutDeletedStudent.push(student)
+                        }
+                    })
+                    studentList.value = studentListWithoutDeletedStudent    
+                } 
+            }
+
+            const sortedStudents = computed( () => {
+                return studentList.value.toSorted( (student1, student2) => {
+                    return student1.name.localeCompare(student2.name)
+                })
+            })
+            const studentCount = computed (() =>{
+                return studentList.value.length
+            })
+            return {
+                //return reactive data
+                studentList,
+                newStudentName,
+                newStarID,
+                mostRecentStudent,
+                formErrors,
+                studentCount,
+                //return functions
+                addStudent,
+  
+                arrivedOrLeft,
+                deleteStudent,
+                //return computed properties
+                sortedStudents
+            }
+        }
+}).mount('#app')
+    </script>
+
+</body>
+
+</html>
