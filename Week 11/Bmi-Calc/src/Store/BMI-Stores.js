@@ -1,19 +1,23 @@
 import {defineStore} from 'pinia'
-import {ref, } from 'vue'
+import {ref, computed} from 'vue'
 
 export const useBmiStore = defineStore('bmi', () => {//Needs a name 'bmi' and the const to function setup
 
+const height = ref(1.5)
+const weight = ref(55) 
+// const bmiValue =ref(0)   // use a computed property since we can calculate it from 
+// height and weight 
+const bmiValue = computed( () => {
+    return weight.value / (height.value * height.value)
+})
 
+// skip metric/US measurements, get the basic stuff working 
 
-// I ran into a issue where these variables wont transfer with their value intact current time spent  bugfixing 4hours T_T
-
-
-const height = ref(0)
-const weight = ref(0) 
-const bmiValue =ref(0) 
-const heightMeasurement = 'Meters' 
-const weightMeasurement = 'Kilograms'
-
+return {
+    height,
+    weight,
+    bmiValue
+}
 
 //Why doen't they keep their values when used in the components??????????? 
 
