@@ -1,17 +1,22 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import BMIDisplay from './components/BMIDisplay.vue';
+import BMICalculation from './components/BMI-Calculation.vue';
+import {useBmiStore} from './Store/BMI-Stores'
+import {storeToRefs} from 'pinia'
+
+const useStore = useBmiStore()
+let {calculate} = storeToRefs(useStore)
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+
+
+<BMIDisplay> </BMIDisplay>
+<BMICalculation v-on:userInputData="calculate"> </BMICalculation>
+
+
+
 </template>
 
 <style scoped>

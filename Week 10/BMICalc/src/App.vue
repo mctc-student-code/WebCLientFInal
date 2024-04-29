@@ -23,13 +23,8 @@ const bmiValue =ref(0)
 
 //This line of code prints out the users choice as well as additional dialog to make the app appear friendly 
 
-let metricUnitsApp = ref(false)
 
-function convertTrue(metricUnitsBMI) {
- metricUnitsBMI.value = !metricUnitsBMI.value
- 
- console.log('convertTrue')
-}
+
 //ask teacher about parameters, I need to understand them better
 function calculate(height, weight){
   let bmi = weight /(height * height)
@@ -37,13 +32,28 @@ function calculate(height, weight){
   console.log(bmiValue)
 }
 
- function calculateImperial (){
+
+/* 
+ function calculateImperial if(convertUnits === true){
   let bmi = weight /(height * height) * 730
   bmiValue.value = (bmi.toPrecision(3))//rounds the number 2 decimal
-  console.log(bmiValue)}
+  console.log(bmiValue)
+  } */
 
-  
-
+/* 
+function unitsOfMeasurement() {
+  if (convertUnits == true){ heightMeasurement.value = 'Inches', weightMeasurement.value = 'Pounds'
+    }
+  if (convertUnits == false){heightMeasurement.value = 'Meters', weightMeasurement.value = 'Kilograms'}
+} */
+const error =[];
+function inputValidation(){
+    if (height.value > 0){
+        height.value = 0}
+    if (weight.value > 0){
+        weight.value = 0
+    }
+}
 
 
 
@@ -52,15 +62,10 @@ function calculate(height, weight){
 <template>
 <div id="app-component"></div>
 <h1>BMICalc</h1>
-<h1>{{metricUnitsBMI}}</h1>
 <!--down below connects Vue to the questions amd the answers-->
-<BodyMassIndexCalc v-on:userInputData="calculate"
-v-bind:metricUnitsBMI="metricUnitsApp">
+<BodyMassIndexCalc v-on:userInputData="calculate">
 </BodyMassIndexCalc><!--Detects the message form sendDataToapp-->
 {{ bmiValue }}
-<label for="convert">Change unit of measurment?</label>
-<input v-model="metricUnitsApp" type="checkbox" id="convertUnits" v-on:change="convertTrue" >
-
 
 
 </template>

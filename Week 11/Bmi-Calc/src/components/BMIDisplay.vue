@@ -1,21 +1,21 @@
 <script setup>
-import {useBMI-Store} from '../Stores/BMI-Store.js'
-import {storeToRefs} from  'pinia'
+import {storeToRefs} from 'pinia'
+import {useBmiStore} from '../Store/BMI-Stores'
+const useStore = useBmiStore()
+let {height,weight,bmiValue} = storeToRefs(useStore)
 
-
-
+const heightMeasurement = 'Meters'
+const weightMeasurement = 'Kilograms'
 
 
 </script>
 
 <template>
 
-
-
 <div id ="bmi">
 <h2>Please enter you weight & height in the fields below </h2>
 <h3>This app will convert negative numbers into positive</h3>
-
+</div>
 <div>
 
     <label for="your-height">Enter your height in {{heightMeasurement}}   </label>
@@ -27,12 +27,8 @@ import {storeToRefs} from  'pinia'
         <p>
             You are measuring in {{ heightMeasurement }} and {{ weightMeasurement }}
         </p>
-    <p>
-        <button @click="sendDataToApp">calculate</button> <!--Let's start using @click more, it's more convient-->
-    </p>
-</div>
 
-
+            <p>{{ bmiValue }}</p>
 </div>
 
 </template>
